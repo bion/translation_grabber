@@ -15,7 +15,6 @@ function bodyRequest(url, success) {
             process.exit(1);
         }
 
-// find list of translation anchors
     })
 }
 
