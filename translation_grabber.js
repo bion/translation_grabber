@@ -6,10 +6,11 @@ var ORIGINAL_TEXT_QUERY_STRING = "?SHOW_ORIGINAL_TEXT";
 var INDEX_PAGE = 'http://watchingamerica.com/News/author/johnson2/';
 
 // request translator index page
-function bodyRequest(url, success) {
+function bodyRequest(url, successCallback) {
     request(url, function (error, response, body) {
         if (!error && response.statusCode == 200) {
-            success(body);
+            var $ = cheerio.load(body);
+            successCallback($);
         } else {
             console.log("unsuccessful request made to " + url);
             process.exit(1);
@@ -19,9 +20,8 @@ function bodyRequest(url, success) {
 }
 
 // extract list of translation anchors
-function extractArticleUrls(body) {
+function extractArticleUrls($) {
     var anchors = [];
-    var $ = cheerio.load(body);
 
     $('.table-striped a').each(function (i, el) {
         anchors.push(el.attribs.href);
