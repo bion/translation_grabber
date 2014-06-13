@@ -3,6 +3,7 @@ var request = require('request');
 var cheerio = require('cheerio');
 
 var ORIGINAL_TEXT_QUERY_STRING = "?SHOW_ORIGINAL_TEXT";
+var INDEX_PAGE = 'http://watchingamerica.com/News/author/johnson2/';
 
 // request translator index page
 
