@@ -6,7 +6,7 @@ var ARTICLE_DIR = '../watching_america/scraped_articles/';
 
 var ORIGINAL_TEXT_QUERY_STRING = "?SHOW_ORIGINAL_TEXT";
 var INDEX_PAGE = 'http://watchingamerica.com/News/author/johnson2/';
-var LAST_PATH_REGEXP = /(\w|-)+\/$/
+var LAST_PATH_REGEXP = /(\w|-)+\/$/;
 
 function bodyRequest(url, successCallback) {
     request(url, function (error, response, body) {
@@ -36,7 +36,7 @@ function extractArticleUrls(callback) {
 }
 
 function extractArticle($) {
-    return $('.headcol1 table')
+    return $('.headcol1 table');
 }
 
 function loopOverUrls(urls) {
