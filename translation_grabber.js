@@ -2,6 +2,8 @@ var fs = require('fs');
 var request = require('request');
 var cheerio = require('cheerio');
 
+var ARTICLE_DIR = '../watching_america/scraped_articles/';
+
 var ORIGINAL_TEXT_QUERY_STRING = "?SHOW_ORIGINAL_TEXT";
 var INDEX_PAGE = 'http://watchingamerica.com/News/author/johnson2/';
 var LAST_PATH_REGEXP = /(\w|-)+\/$/
