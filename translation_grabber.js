@@ -18,14 +18,18 @@ function bodyRequest(url, successCallback) {
     })
 }
 
-function extractArticleUrls($) {
-    var anchors = [];
+function extractArticleUrls(callback) {
+    return function ($) {
+        var urls = [];
 
-    $('.table-striped a').each(function (i, el) {
-        anchors.push(el.attribs.href);
-    });
+        $('.table-striped a').each(
+            function (i, el) {
+                urls.push(el.attribs.href);
+            }
+        );
 
-    return anchors;
+        callback(urls);
+    }
 }
 
 function extractArticle($) {
