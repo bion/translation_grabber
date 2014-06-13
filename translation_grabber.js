@@ -18,6 +18,20 @@ function bodyRequest(url, success) {
     })
 }
 
+// extract list of translation anchors
+function extractAnchors(body) {
+    var anchors = [];
+    var $ = cheerio.load(body);
+
+    $('.table-striped a').each(function (i, el) {
+        anchors.push(el.attribs.href);
+    });
+
+    return anchors;
+}
+
+anchors = bodyRequest(INDEX_PAGE, extractAnchors);
+
 // for each anchor:
 //   pull down page, save contents of 'div.headcol1' to file
 //   pull down page + og text query string, save contents of 'div.headcol1' to file
