@@ -50,5 +50,5 @@ function loopOverUrls(urls) {
 bodyRequest(INDEX_PAGE, extractArticleUrls(loopOverUrls));
 
 // for each anchor:
-//   pull down page, save contents of 'div.headcol1' to file
-//   pull down page + og text query string, save contents of 'div.headcol1' to file
+//   pull down page, save contents of 'div.headcol1' to file, use fs.mkdir to make directory for it, save english version
+//   pull down page + og text query string, save contents of 'div.headcol1'
