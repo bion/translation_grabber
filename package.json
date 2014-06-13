@@ -1,0 +1,11 @@
+{
+
+    "name"    : "translation_grabber",
+    "version" : "0.0.1",
+    "main"    : "translation_grabber.js",
+    "dependencies" : {
+        "request" : "latest",
+        "cheerio" : "latest"
+    }
+
+}
