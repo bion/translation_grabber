@@ -19,7 +19,7 @@ function bodyRequest(url, success) {
 }
 
 // extract list of translation anchors
-function extractAnchors(body) {
+function extractArticleUrls(body) {
     var anchors = [];
     var $ = cheerio.load(body);
 
@@ -30,7 +30,7 @@ function extractAnchors(body) {
     return anchors;
 }
 
-anchors = bodyRequest(INDEX_PAGE, extractAnchors);
+anchors = bodyRequest(INDEX_PAGE, extractArticleUrls);
 
 // for each anchor:
 //   pull down page, save contents of 'div.headcol1' to file
