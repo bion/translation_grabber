@@ -4,6 +4,7 @@ var cheerio = require('cheerio');
 
 var ORIGINAL_TEXT_QUERY_STRING = "?SHOW_ORIGINAL_TEXT";
 var INDEX_PAGE = 'http://watchingamerica.com/News/author/johnson2/';
+var LAST_PATH_REGEXP = /(\w|-)+\/$/
 
 function bodyRequest(url, successCallback) {
     request(url, function (error, response, body) {
@@ -36,7 +37,17 @@ function extractArticle($) {
     return $('.headcol1 table')
 }
 
-anchors = bodyRequest(INDEX_PAGE, extractArticleUrls);
+function loopOverUrls(urls) {
+    var articles = [];
+
+    for (var i = 0; i < urls.length; i++) {
+        var name = urls[i].match(LAST_PATH_REGEXP)[0];
+        name = name.substring(0, name.length - 1); // get rid of trailing slash
+    }
+
+}
+
+bodyRequest(INDEX_PAGE, extractArticleUrls(loopOverUrls));
 
 // for each anchor:
 //   pull down page, save contents of 'div.headcol1' to file
