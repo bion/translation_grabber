@@ -28,6 +28,10 @@ function extractArticleUrls($) {
     return anchors;
 }
 
+function extractArticle($) {
+    return $('.headcol1 table')
+}
+
 anchors = bodyRequest(INDEX_PAGE, extractArticleUrls);
 
 // for each anchor:
