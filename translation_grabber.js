@@ -39,27 +39,25 @@ function extractArticle($) {
     return $('.headcol1 td').html();
 }
 
-function writeArticleFunc(article_dir) {
+function writeArticleFunc(article_dir, article_version) {
     return function ($) {
         var article = extractArticle($);
-        fs.mkdirSync(article_dir);
-        fs.writeFileSync(article_dir + 'english.html', article);
+        if (!fs.existsSync(article_dir)) {
+            fs.mkdirSync(article_dir);
+        }
+        fs.writeFile(article_dir + article_version + '.html', article);
     }
 }
 
 function loopOverUrls(urls) {
     for (var i = 0; i < urls.length; i++) {
-        var article, article_dir;
+        var article_dir;
         var name = urls[i].match(LAST_PATH_REGEXP)[0];
         article_dir = ARTICLES_DIR + name.substring(0, name.length - 1) + '/';
 
-        bodyRequest(urls[i], writeArticleFunc(article_dir));
+        bodyRequest(urls[i], writeArticleFunc(article_dir, 'translation'));
+        bodyRequest(urls[i] + ORIGINAL_TEXT_QUERY_STRING, writeArticleFunc(article_dir, 'original'));
     }
-
 }
 
 bodyRequest(INDEX_PAGE, extractArticleUrls(loopOverUrls));
-
-// for each anchor:
-//   pull down page, save contents of 'div.headcol1' to file, use fs.mkdir to make directory for it, save english version
-//   pull down page + og text query string, save contents of 'div.headcol1'
