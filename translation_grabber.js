@@ -38,19 +38,25 @@ function extractArticleUrls(callback) {
 function extractArticle($) {
     return $('.headcol1 td').html();
 }
+
+function writeArticleFunc(article_dir) {
+    return function ($) {
+        var article = extractArticle($);
+        fs.mkdirSync(article_dir);
+        fs.writeFileSync(article_dir + 'english.html', article);
+    }
 }
 
 function loopOverUrls(urls) {
     for (var i = 0; i < urls.length; i++) {
         var name = urls[i].match(LAST_PATH_REGEXP)[0];
+        var article, article_dir;
+
         name = name.substring(0, name.length - 1); // get rid of trailing slash
+
         article_dir = ARTICLES_DIR + name + '/';
 
-        fs.mkdir(article_dir);
-
-        article = bodyRequest(extractArticle(urls[i]));
-
-        fs.writeSync(article_dir + 'english', article);
+        bodyRequest(urls[i], writeArticleFunc(article_dir));
     }
 
 }
