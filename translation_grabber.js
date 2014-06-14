@@ -49,12 +49,9 @@ function writeArticleFunc(article_dir) {
 
 function loopOverUrls(urls) {
     for (var i = 0; i < urls.length; i++) {
-        var name = urls[i].match(LAST_PATH_REGEXP)[0];
         var article, article_dir;
-
-        name = name.substring(0, name.length - 1); // get rid of trailing slash
-
-        article_dir = ARTICLES_DIR + name + '/';
+        var name = urls[i].match(LAST_PATH_REGEXP)[0];
+        article_dir = ARTICLES_DIR + name.substring(0, name.length - 1) + '/';
 
         bodyRequest(urls[i], writeArticleFunc(article_dir));
     }
