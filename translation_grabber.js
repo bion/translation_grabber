@@ -36,7 +36,7 @@ function extractArticleUrls(callback) {
 }
 
 function extractArticle($) {
-    return $('.headcol1 table');
+    return $('.headcol1 td');
 }
 
 function loopOverUrls(urls) {
